@@ -1,5 +1,5 @@
 {
-	"InstallScripts" :
+	"InstallScripts" : 
 	[
 		"/home/acidburner/Programming/raylib_boilerplate/build/cmake_install.cmake"
 	],
