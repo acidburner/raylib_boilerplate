@@ -1,0 +1,1 @@
+Render_API is a wrapper header to allow arbitrary render swapping. This is in case raylib turns out to be ass, or I need something more powerful in the future like SDL, or Vulkan directly.

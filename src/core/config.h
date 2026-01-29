@@ -1,0 +1,9 @@
+// compiled configuration
+
+#pragma once
+
+#define CONFIG_ENABLE_LOGGING 1
+#define CONFIG_LOGGING_LIBRARY_SLOG 1
+#define CONFIG_ENABLE_RENDERER 1
+#define CONFIG_RENDERER_LIBRARY_RAYLIB 1
+

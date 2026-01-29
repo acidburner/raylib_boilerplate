@@ -1,0 +1,39 @@
+#include "in_game.h"
+#include "game/game.h"
+#include "core/log/log.h"
+#include "game/states.h"
+
+// in_game
+void in_game_enter(Game *game)
+{
+  LOG_INFO("Entering In-Game State");
+}
+void in_game_update(Game *game)
+{
+  // if(!game || !game->world) {
+  //   LOG_WARN("Game or World is NULL in in_game_update");
+  //   return;
+  // }
+  // LOG_INFO("Updating In-Game State, delta time: %f", game->delta_time);
+  // update_game_state(game, GAME_STATE_PAUSED);
+  // test input handler
+  if (game->input)
+  {
+    // LOG_INFO("Checking input in In-Game State");
+    if (input_action_pressed(game->input, INPUT_KEY_PAUSE))
+    {
+      LOG_INFO("Escape key pressed");
+      // ToDo: toggle pause state
+      update_game_state(game, GAME_STATE_PAUSED);
+    }
+    if (input_action_pressed(game->input, INPUT_KEY_DEBUG_TOGGLE))
+    {
+      game->debug_overlay_enabled = !game->debug_overlay_enabled;
+      LOG_INFO("Debug overlay toggled: %s", game->debug_overlay_enabled ? "ON" : "OFF");
+    }
+  }
+}
+void in_game_exit(Game *game)
+{
+  LOG_INFO("Exiting In-Game State");
+}
