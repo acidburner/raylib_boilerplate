@@ -1,4 +1,0 @@
-/home/acidburner/Programming/raylib_boilerplate/build/CMakeFiles/raylib_boilerplate.dir
-/home/acidburner/Programming/raylib_boilerplate/build/CMakeFiles/copy_assets.dir
-/home/acidburner/Programming/raylib_boilerplate/build/CMakeFiles/edit_cache.dir
-/home/acidburner/Programming/raylib_boilerplate/build/CMakeFiles/rebuild_cache.dir
