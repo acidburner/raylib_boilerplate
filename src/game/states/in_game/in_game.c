@@ -10,20 +10,12 @@ void in_game_enter(Game *game)
 }
 void in_game_update(Game *game)
 {
-  // if(!game || !game->world) {
-  //   LOG_WARN("Game or World is NULL in in_game_update");
-  //   return;
-  // }
-  // LOG_INFO("Updating In-Game State, delta time: %f", game->delta_time);
-  // update_game_state(game, GAME_STATE_PAUSED);
-  // test input handler
   if (game->input)
   {
     // LOG_INFO("Checking input in In-Game State");
     if (input_action_pressed(game->input, INPUT_KEY_PAUSE))
     {
       LOG_INFO("Escape key pressed");
-      // ToDo: toggle pause state
       update_game_state(game, GAME_STATE_PAUSED);
     }
     if (input_action_pressed(game->input, INPUT_KEY_DEBUG_TOGGLE))

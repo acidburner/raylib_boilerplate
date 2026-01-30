@@ -55,7 +55,6 @@ Game* game_create(RenderAPI *render_api, PlatformInputAPI *platform_input_api, L
             game->logger->init(NULL, LOG_MASK, 1);
         }
         LOG_INFO("Logger initialized");
-        game->world = world_create(100, 100); // Example dimensions
         game->is_running = true;
         game->debug_overlay_enabled = false;
         game->delta_time = 0.0;
@@ -72,9 +71,6 @@ void game_destroy(Game *game) {
     if (game->renderer) {
         game->renderer->api->shutdown();
         free(game->renderer);
-    }
-    if (game->world) {
-        world_destroy(game->world);
     }
     if(game->logger && game->logger->shutdown) {
         game->logger->shutdown();

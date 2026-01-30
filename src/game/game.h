@@ -5,7 +5,6 @@
 #include "render/game_renderer.h"
 #include "input/input.h"
 #include "core/log/log_api.h"
-#include "world/world.h"
 
 // Game definitions
 #define GAME_NAME "raylib boilerplate"
@@ -28,7 +27,6 @@ typedef struct Game {
     GameRender *renderer;
     InputSystem *input;
     LogApi *logger;
-    World *world;
     bool is_running;
     double delta_time;
     double last_delta_time;
