@@ -4,7 +4,7 @@ typedef enum GameState
 {
     GAME_STATE_INVALID = -1,
     GAME_STATE_BOOT,
-    GAME_STATE_MENU,
+    GAME_STATE_MAIN_MENU,
     GAME_STATE_SETTINGS,
     GAME_STATE_PLAYING,
     GAME_STATE_PAUSED,
@@ -18,6 +18,8 @@ typedef struct GameStateVTable {
     void (*enter)(Game *game);
     void (*update)(Game *game);
     void (*exit)(Game *game);
+    void (*render)(Game *game);
+    // ToDo additional callbacks as needed
 } GameStateVTable;
 
 void update_game_state(Game *game, GameState newState);

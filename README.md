@@ -1,6 +1,7 @@
 # Raylib Boilerplate
 
-scaffold for quickly making raylib games.
+Scaffold for developing games using raylib and C.
+
 
 ## supports
 

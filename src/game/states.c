@@ -29,7 +29,7 @@ static GameStateVTable gameStateTable[GAME_STATE_COUNT] = {
         .update = boot_update,
         .exit = boot_exit
     }, // implement boot state handlers
-    [GAME_STATE_MENU] = {
+    [GAME_STATE_MAIN_MENU] = {
         .enter = menu_enter,
         .update = menu_update,
         .exit = menu_exit

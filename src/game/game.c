@@ -91,7 +91,7 @@ void game_init(Game *game) {
         );
     }
     // Load assets, initialize game state, etc.
-    // update_game_state(game, GAME_STATE_MENU);
+    // update_game_state(game, GAME_STATE_MAIN_MENU);
     LOG_INFO("Game initialized.");
 }
 
@@ -146,9 +146,15 @@ void game_tick(Game *game) {
     game->delta_time = get_platform_time_delta(game->last_delta_time, now);
     game->last_delta_time = now;
     const GameStateVTable *table = get_game_state_vtable();
+    //global input
+    HandleGlobalInput(game);
+    //FYI state input is handled within their own dispatchers within the states folder
+    //game update
     if( table[game->currentState].update ) {
         table[game->currentState].update(game);
     }
-    // Placeholder for game tick logic
-    // Update game state, handle inputs, render frame, etc.
+    //render
+    if( table[game->currentState].render ) {
+        table[game->currentState].render(game);
+    }
 }

@@ -17,17 +17,3 @@ void HandleGameDispatch(Game *game)
   }
 }
 
-void handle_pause(Game *game) {
-  if (input_action_pressed(game->input, INPUT_KEY_PAUSE))
-  {
-    update_game_state(game, GAME_STATE_PAUSED);
-  }
-}
-
-void handle_debug_toggle(Game *game) {
-  if (input_action_pressed(game->input, INPUT_KEY_DEBUG_TOGGLE))
-  {
-    game->debug_overlay_enabled = !game->debug_overlay_enabled;
-    LOG_INFO("Debug overlay toggled: %s", game->debug_overlay_enabled ? "ON" : "OFF");
-  }
-}
