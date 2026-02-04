@@ -1,6 +1,5 @@
-
 #pragma once
 
 #include "game/game.h"
 
-void HandleGlobalInput(Game *game);
+void handle_press_any_key(Game *game);

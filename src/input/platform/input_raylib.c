@@ -20,8 +20,14 @@ static bool rl_is_key_down(PhysicalKeysInput key)
     return is_key_down(key);
 }
 
+static int rl_get_key_pressed(void)
+{
+    return GetKeyPressed();
+}
+
 const PlatformInputAPI RAYLIB_INPUT_API = {
     .update = rl_update,
+    .get_last_key = rl_get_key_pressed,
     .key_pressed = rl_is_key_pressed,
     .key_down = rl_is_key_down
 };

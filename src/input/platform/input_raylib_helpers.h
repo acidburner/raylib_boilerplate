@@ -41,6 +41,7 @@ static inline bool debug_toggle_pressed(void) {
     return IsKeyPressed(KEY_F1);
 }
 
+
 // physical key checkers
 static inline bool is_key_pressed(PhysicalKeysInput key) {
     switch(key) {

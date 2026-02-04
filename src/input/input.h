@@ -76,6 +76,46 @@ typedef enum PhysicalKeysInput
   PHYSICAL_KEY_COUNT
 } PhysicalKeysInput;
 
+// Map PhysicalKeysInput to character representation (for display purposes)
+static const char* PhysicalKeyToStringMap[PHYSICAL_KEY_COUNT] = {
+    "",
+    "W",
+    "A",
+    "S",
+    "D",
+    "UP",
+    "DOWN",
+    "LEFT",
+    "RIGHT",
+    "ESCAPE",
+    "F1",
+    "ENTER",
+    "E",
+    "MOUSE_LEFT",
+    "MOUSE_RIGHT",
+    "MOUSE_MIDDLE",
+    "MOUSE_SCROLL_UP",
+    "MOUSE_SCROLL_DOWN",
+    "MOUSE_FORWARD",
+    "MOUSE_BACK",
+    "GAMEPAD_DPAD_UP",
+    "GAMEPAD_DPAD_DOWN",
+    "GAMEPAD_DPAD_LEFT",
+    "GAMEPAD_DPAD_RIGHT",
+    "GAMEPAD_BUTTON_A",
+    "GAMEPAD_BUTTON_B",
+    "GAMEPAD_BUTTON_X",
+    "GAMEPAD_BUTTON_Y",
+    "GAMEPAD_LEFT_TRIGGER",
+    "GAMEPAD_LEFT_BUMPER",
+    "GAMEPAD_RIGHT_TRIGGER",
+    "GAMEPAD_RIGHT_BUMPER",
+    "GAMEPAD_BUTTON_BACK",
+    "GAMEPAD_BUTTON_START",
+    "GAMEPAD_LEFT_CLICK",
+    "GAMEPAD_RIGHT_CLICK"
+};
+
 // maximum number of physical keys per action
 #define MAX_BINDINGS_PER_ACTION 4 //can be changed as needed
 
@@ -86,13 +126,6 @@ typedef enum InputDevice
   GAMEPAD,
 } InputDevice;
 
-// input mappings
-typedef struct InputBinding
-{
-  InputDevice device;
-  int code; // e.g., KeyboardInput, MouseInput, GamepadInput
-} InputBinding;
-
 typedef struct ActionBindings
 {
   PhysicalKeysInput  bindings[MAX_BINDINGS_PER_ACTION];
@@ -102,6 +135,7 @@ typedef struct ActionBindings
 typedef struct Input
 {
   ActionBindings action_bindings[INPUT_KEY_COUNT]; // assuming a maximum of 32 actions
+  PhysicalKeysInput last_key_used;
 } Input;
 
 typedef struct DefaultActionBinding
@@ -112,6 +146,7 @@ typedef struct DefaultActionBinding
 typedef struct PlatformInputAPI
 {
   void (*update)(void);
+  int  (*get_last_key)(void);
   bool (*key_pressed)(PhysicalKeysInput key);
   bool (*key_down)(PhysicalKeysInput key);
 } PlatformInputAPI;

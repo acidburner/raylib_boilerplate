@@ -19,4 +19,15 @@ void debug_overlay_render(Game *game) {
     api->draw_text(buffer, 10, 40, 16, (Color){255, 255, 255, 255});
     snprintf(buffer, sizeof(buffer), "Delta Time: %.3f ms", game->delta_time * 1000.0);
     api->draw_text(buffer, 10, 60, 16, (Color){255, 255, 255, 255});
+    GameState state = game->currentState;
+    //convert current state to string
+    char * state_str = "TEST";
+    snprintf(buffer, sizeof(buffer), "Current State: %s", state_str);
+    api->draw_text(buffer, 10, 80, 16, (Color){255, 255, 255, 255});
+    //draw last key and character pressed
+    PhysicalKeysInput last_key = game->input->bindings.last_key_used;
+    // convert input to string representation
+    snprintf(buffer, sizeof(buffer), "Last Key Pressed: %d", last_key);
+    api->draw_text(buffer, 10, 100, 16, (Color){255, 255, 255, 255});
+
   }

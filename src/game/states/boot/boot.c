@@ -4,7 +4,12 @@
 #include "game/states.h"
 
 #include <raylib.h>
+
+// inputs
+#include "input_handlers/press_any_key.h"
 // boot
+
+#define PRESS_ANY_KEY_TEXT "Press Any Key"
 void boot_enter(Game *game)
 {
   LOG_INFO("Entering Boot State");
@@ -14,19 +19,20 @@ void boot_enter(Game *game)
 void boot_update(Game *game)
 {
   // Perform boot operations, loading resources, etc.
-  LOG_INFO("Updating Boot State, delta time: %f", game->delta_time);
+  handle_press_any_key(game);
 }
 void boot_render(Game *game)
 {
   // Render boot state visuals if any
+  // LOG_INFO("Rendering Boot State");
+  // ToDo use game->renderer api to draw boot screen
   ClearBackground(BLACK);
   DrawText("Booting...", 20, 20, 20, WHITE);
+  DrawRectangleLines(45, 90, 160, 40, RED);
+  DrawText(PRESS_ANY_KEY_TEXT, 50, 100, 20, WHITE);
 }
 void boot_exit(Game *game)
 {
   // Cleanup boot state resources if any
   LOG_INFO("Exiting Boot State");
-  WaitTime(0.5); // Simulate cleanup time
-  // update to main menu
-  update_game_state(game, GAME_STATE_MAIN_MENU);
 }

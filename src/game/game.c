@@ -10,6 +10,7 @@
 #include "render/debug_overlay/debug_overlay.h"
 // game
 #include "game.h"
+#include "global_state_input.h"
 // std libs
 #include <stddef.h>
 #include <stdlib.h>
@@ -116,6 +117,7 @@ void game_start(Game *game) {
         }
         game->renderer->api->begin_frame();
         game_tick(game);
+        // render globals
         if(game->debug_overlay_enabled) {
             debug_overlay_render(game);
         }
@@ -146,6 +148,11 @@ void game_tick(Game *game) {
     game->delta_time = get_platform_time_delta(game->last_delta_time, now);
     game->last_delta_time = now;
     const GameStateVTable *table = get_game_state_vtable();
+    //set last key used
+    int keyCode = GetKeyPressed();
+    if(keyCode != 0) {
+        game->input->bindings.last_key_used = keyCode;
+    }
     //global input
     HandleGlobalInput(game);
     //FYI state input is handled within their own dispatchers within the states folder
@@ -157,4 +164,5 @@ void game_tick(Game *game) {
     if( table[game->currentState].render ) {
         table[game->currentState].render(game);
     }
+
 }
