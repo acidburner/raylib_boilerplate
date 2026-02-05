@@ -22,6 +22,7 @@ typedef struct Settings {
     float music_volume;
     float sfx_volume;
     KeybindsMap keybinds;
+    char * fontPath;
     // add more settings as needed
 } Settings;
 
