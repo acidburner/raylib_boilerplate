@@ -2,6 +2,8 @@
 #include "core/log/log.h"
 #include "core/panic.h"
 #include "clock/timer.h"
+#include "core/window.h"
+// settings
 // input
 #include "input/input.h"
 #include "input/platform/input_raylib.h"
@@ -31,8 +33,8 @@ Game* game_create(RenderAPI *render_api, PlatformInputAPI *platform_input_api, L
     game->previousState = GAME_STATE_INVALID;
     if (game) {
         game->settings = (Settings){
-            .window_width = 800,
-            .window_height = 600,
+            .window_width = WINDOW_WIDTH,
+            .window_height = WINDOW_HEIGHT,
             .fullscreen = false,
             .master_volume = 1.0f,
             .music_volume = 0.8f,
@@ -88,7 +90,7 @@ void game_init(Game *game) {
         game->renderer->api->initWindow(
             game->settings.window_width,
             game->settings.window_height,
-            GAME_NAME
+            WINDOW_TITLE
         );
     }
     // Load assets, initialize game state, etc.
