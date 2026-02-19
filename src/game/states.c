@@ -32,6 +32,7 @@ static GameStateVTable gameStateTable[GAME_STATE_COUNT] = {
     }, // implement boot state handlers
     [GAME_STATE_MAIN_MENU] = {
         .enter = menu_enter,
+        .render = menu_render,
         .update = menu_update,
         .exit = menu_exit
     },

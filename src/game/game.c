@@ -9,7 +9,7 @@
 #include "input/platform/input_raylib.h"
 #include "input/input.h"
 // render
-#include "render/debug_overlay/debug_overlay.h"
+#include "render/global/debug_overlay/debug_overlay.h"
 // game
 #include "game.h"
 #include "global_state_input.h"
@@ -113,7 +113,7 @@ void game_start(Game *game) {
     game->is_running = true;
     game->last_delta_time = get_platform_time_now();
     while(game->is_running) {
-        if(game->renderer->api->window_should_close()) {
+        if(game->currentState == GAME_STATE_SHUTDOWN) {
             game_shutdown(game);
             break;
         }

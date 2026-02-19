@@ -6,6 +6,10 @@
 #include <raylib.h>
 #include <stdbool.h>
 
+#include "core/log/log.h"
+
+#define LOG_CATEGORY "InputRaylibHelpers"
+
 // input comparators for in-game actions
 static inline bool move_up_pressed(void) {
     return IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)
@@ -195,4 +199,27 @@ static inline bool is_key_down(PhysicalKeysInput key) {
         default:
             return false;
     }
+}
+
+// todo: only works if all keys are mapped in the PhysicalKeysInput enum, which is currently the case, but should be implemented more robustly in the future by directly checking all keys, mouse buttons, and gamepad buttons using raylib's input functions instead of relying on our own enum mapping
+static inline bool is_any_key_pressed(void) {
+    for( int key = PHYS_KEY_NONE + 1; key < PHYSICAL_KEY_COUNT; key++) {
+        if(is_key_pressed(key)) {
+            return true;
+        }
+    }
+    if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT) ||
+        IsMouseButtonPressed(MOUSE_BUTTON_RIGHT) ||
+        IsMouseButtonPressed(MOUSE_BUTTON_MIDDLE) ||
+        IsMouseButtonPressed(MOUSE_BUTTON_SIDE) ||
+         IsMouseButtonPressed(MOUSE_BUTTON_EXTRA)
+    ) {
+        return true;
+    }
+    if(GetMouseWheelMove() != 0.0f) {
+        return true;
+    }
+    //todo gamepad buttons
+    return false;
+    // todo: implement this properly by checking all keys, mouse buttons, and gamepad buttons instead of relying on raylib's GetKeyPressed which only checks the keyboard
 }

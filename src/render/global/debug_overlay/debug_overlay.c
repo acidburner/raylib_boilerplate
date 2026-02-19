@@ -16,27 +16,27 @@ void debug_overlay_render(Game *game) {
   int padding_between_sections = 10; // vertical padding between sections of text
   // todo add margins/padding and tiling to dialog windows
 
-  int overlay_width = window_width - overlay_margin * 2; // 100% of window width - margins
-  int overlay_height = window_height / 2 -  overlay_margin * 2; // 100% of window height - margins
+  int overlay_width = window_width - overlay_margin * 2; // width includes margins on both sides
+  int overlay_height = window_height / 2 -  overlay_margin * 2; // height includes margin at top and bottom, and takes up half the screen height
 
-
+  int sub_height = 30;
   int sub_margin = text_margin + 20;
 
-  int text_start_x = sub_margin;
-  int text_start_y = sub_margin;
+  int text_start_x = sub_margin; //start text at 20 pixels from the left edge of the window (10 pixels margin + 10 pixels padding)
+  int text_start_y = sub_margin; //start text at 20 pixels from the top edge of the window (10 pixels margin + 10 pixels padding)
 
   // relative positions of x and y of text lines should be based on font size and line spacing, not hardcoded values
-  int fps_start_x = sub_margin; // 30 pixels to the right of the first line
-  int fps_start_y = sub_margin + 30; // 30 pixels below the first
+  int fps_start_x = text_start_x + sub_margin * 1.25; // 30 pixels to the right of the first line
+  int fps_start_y = text_start_y + sub_height; // 30 pixels below the first
 
-  int delta_time_start_x = sub_margin;       // aligned with first line
-  int delta_time_start_y = sub_margin + 60; // 60 pixels below the first line
+  int delta_time_start_x = fps_start_x;       // aligned with first line
+  int delta_time_start_y = fps_start_y + sub_height; // 60 pixels below the first line
 
-  int current_State_start_x = sub_margin;       // aligned with first line
-  int current_State_start_y = sub_margin + 90; // 90 pixels below the
+  int current_State_start_x = fps_start_x;       // aligned with first line
+  int current_State_start_y = delta_time_start_y + sub_height; // 90 pixels below the first line
 
-  int last_key_start_x = sub_margin;        // aligned with first line
-  int last_key_start_y = sub_margin + 120; // 120 pixels below the
+  int last_key_start_x = fps_start_x;        // aligned with first line
+  int last_key_start_y = current_State_start_y + sub_height; // 120 pixels below the first line
 
   //font sizes
   int header_font_size = 20;
