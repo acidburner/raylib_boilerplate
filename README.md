@@ -2,6 +2,9 @@
 
 Scaffold for developing games using raylib and C.
 
+This is entirely a work in progress, and is meant for my own learning and reference.
+
+Here be dragons.
 
 ## supports
 
@@ -10,5 +13,3 @@ Scaffold for developing games using raylib and C.
 - file i/o
 - settings
 - keybinds
-- better state change information
-- menu
