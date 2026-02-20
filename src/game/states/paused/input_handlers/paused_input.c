@@ -1,56 +1,69 @@
-#include "menu_input.h"
-#include "game/states/main_menu/main_menu.h"
+#include "paused_input.h"
+#include "game/states/paused/paused.h"
 #include "input/input.h"
 #include "core/log/log.h"
 
 // ToDo: refactor MainMenu with Settings menu as there is overlap in functionality and structure, we can create a generic MenuState that both MainMenu and SettingsMenu can utilize to reduce code duplication and improve maintainability. This would involve abstracting common menu behaviors such as navigation, selection, and rendering into a base MenuState structure and then having specific implementations for MainMenu and SettingsMenu that define their unique options and actions.
-void handle_menu_input(Game *game, MainMenuOption *current_selection) {
+void handle_paused_input(Game *game, PausedMenuOption *current_selection)
+{
   // use input api to check for key presses and update menu selection
   // use mouse input to highlight and select menu options
   // ToDo: implement menu navigation and selection logic based on input
-  if(!game->input) {
+  if (!game->input)
+  {
     return;
   }
   // Example: Check for up/down arrow keys to navigate menu options
-  if (input_action_pressed(game->input, INPUT_KEY_MOVE_UP)) {
+  if (input_action_pressed(game->input, INPUT_KEY_MOVE_UP))
+  {
     // Move selection up
     LOG_INFO("Menu Input: Move Up");
-    if(*current_selection == 0) {
-      *current_selection = MAIN_MENU_OPTION_COUNT - 1; // wrap around to last option
-    } else {
+    if (*current_selection == 0)
+    {
+      *current_selection = PAUSED_MENU_OPTION_COUNT - 1; // wrap around to last option
+    }
+    else
+    {
       (*current_selection)--;
     }
-
   }
-  else if (input_action_pressed(game->input, INPUT_KEY_MOVE_DOWN)) {
+  else if (input_action_pressed(game->input, INPUT_KEY_MOVE_DOWN))
+  {
     // Move selection down
     LOG_INFO("Menu Input: Move Down");
-    if(*current_selection == MAIN_MENU_OPTION_COUNT - 1) {
+    if (*current_selection == PAUSED_MENU_OPTION_COUNT - 1)
+    {
       *current_selection = 0; // wrap around to first option
-    } else {
+    }
+    else
+    {
       (*current_selection)++;
     }
   }
-  else if (input_action_pressed(game->input, INPUT_KEY_INTERACT)) {
+  else if (input_action_pressed(game->input, INPUT_KEY_INTERACT))
+  {
     // Select current menu option
     LOG_INFO("Menu Input: Interact/Select");
-    switch (*current_selection) {
-      case MAIN_MENU_OPTION_START_GAME:
-        LOG_INFO("Selected: Start Game");
-        update_game_state(game, GAME_STATE_PLAYING);
-        break;
-      case MAIN_MENU_OPTION_SETTINGS:
-        LOG_INFO("Selected: Settings");
-        update_game_state(game, GAME_STATE_SETTINGS);
-        break;
-      case MAIN_MENU_OPTION_EXIT:
-        LOG_INFO("Selected: Exit");
-        update_game_state(game, GAME_STATE_SHUTDOWN);
-        break;
-      default:
-        break;
+    switch (*current_selection)
+    {
+    case PAUSED_MENU_OPTION_RESUME:
+      LOG_INFO("Selected: Resume Game");
+      update_game_state(game, GAME_STATE_PLAYING);
+      break;
+    case PAUSED_MENU_OPTION_SETTINGS:
+      LOG_INFO("Selected: Settings");
+      update_game_state(game, GAME_STATE_SETTINGS);
+      break;
+    case PAUSED_MENU_OPTION_EXIT:
+      LOG_INFO("Selected: Exit");
+      update_game_state(game, GAME_STATE_SHUTDOWN);
+      break;
+    default:
+      break;
     }
-  } else {
+  }
+  else
+  {
     // Check for mouse input to highlight/select options
   }
 }

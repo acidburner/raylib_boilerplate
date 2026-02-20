@@ -5,16 +5,16 @@
 
 typedef struct Game Game; // Forward declaration
 
-typedef enum MenuOption {
-    MENU_OPTION_START_GAME,
-    MENU_OPTION_SETTINGS,
-    MENU_OPTION_EXIT,
-    MENU_OPTION_COUNT
-} MenuOption;
+typedef enum MainMenuOption {
+    MAIN_MENU_OPTION_START_GAME,
+    MAIN_MENU_OPTION_SETTINGS,
+    MAIN_MENU_OPTION_EXIT,
+    MAIN_MENU_OPTION_COUNT
+} MainMenuOption;
 
 // main menu options
-extern const char* MENU_OPTIONS[MENU_OPTION_COUNT];
-extern const Vector2 MENU_OPTION_POSITIONS[MENU_OPTION_COUNT];
+extern const char* MAIN_MENU_OPTIONS[MAIN_MENU_OPTION_COUNT];
+extern const Vector2 MAIN_MENU_OPTION_POSITIONS[MAIN_MENU_OPTION_COUNT];
 //state functions
 void menu_enter(Game *game);
 void menu_update(Game *game);
