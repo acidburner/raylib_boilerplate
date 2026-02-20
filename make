@@ -37,6 +37,8 @@ run() {
 }
 
 init() {
+    echo "Initializing new project..."
+    echo "NOTE: This will copy the boilerplate files to a new directory and update the project name in CMakeLists.txt. You must rename the app_name variable in this script to match the name of the boilerplate project folder. The default is $app_name."
     echo "Enter folder name for the project (default: ~/Programming/$app_name): "
     read -r input
     if [ -n "$input" ]; then
@@ -52,8 +54,7 @@ init() {
     echo "Updating references in CMakeLists.txt..."
     sed -i "s|$app_name|$project_name|g" $dir/CMakeLists.txt
     echo "Initialization complete."
-    echo "Changing directory to $dir"
-    cd "$dir"
+    echo "Navigate to $dir, rename app_name in $dir/make and run './make -a' to build and run your project."
 }
 
 usage() {
