@@ -39,21 +39,25 @@ static GameStateVTable gameStateTable[GAME_STATE_COUNT] = {
     [GAME_STATE_SETTINGS] = {
         .enter = settings_enter,
         .update = settings_update,
+        .render = settings_render,
         .exit = settings_exit
     }, // implement settings state handlers
     [GAME_STATE_PLAYING] = {
         .enter = in_game_enter,
         .update = in_game_update,
+        .render = in_game_render,
         .exit = in_game_exit
     }, // implement playing state handlers
     [GAME_STATE_PAUSED] = {
         .enter = paused_enter,
         .update = paused_update,
+        .render = paused_render,
         .exit = paused_exit
     }, // implement paused state handlers
     [GAME_STATE_SHUTDOWN] = {
         .enter = shutdown_enter,
         .update = shutdown_update,
+        .render = shutdown_render,
         .exit = shutdown_exit
     }, // implement shutdown state handlers
 };
