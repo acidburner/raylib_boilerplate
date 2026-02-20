@@ -1,12 +1,16 @@
 #!/bin/bash
 
-version="0.1.0"
-dir=/home/acidburner/Programming/raylib_boilerplate
+version="0.2.0"
+app_name="raylib_boilerplate"
+home_dir=$HOME
+current_dir=$home_dir/Programming/$app_name
+dir=$current_dir
+
 cmake=$(which cmake)
-run_app=./bin/raylib_boilerplate
+run_app=./bin/$app_name
 
 version() {
-    echo -e "version v$version\nraylib_boilerplate build script"
+    echo -e "version v$version\n$app_name build script"
 }
 
 clean() {
@@ -32,20 +36,41 @@ run() {
     $run_app
 }
 
+init() {
+    echo "Enter folder name for the project (default: ~/Programming/$app_name): "
+    read -r input
+    if [ -n "$input" ]; then
+        dir="$home_dir/$input"
+    fi
+    echo "Initializing project directory..."
+    mkdir -p "$dir"
+    echo "Copying boilerplate files..."
+    cp -r ./* "$dir"
+    echo "Project structure initialized."
+    echo "Give your project a name (default: $app_name): "
+    read -r project_name
+    echo "Updating references in CMakeLists.txt..."
+    sed -i "s|$app_name|$project_name|g" $dir/CMakeLists.txt
+    echo "Initialization complete."
+    echo "Changing directory to $dir"
+    cd "$dir"
+}
+
 usage() {
     version
-    echo "Usage: $(basename "$0") [-h] [-c] [-b] [-r] [-a]"
+    echo "Usage: $(basename "$0") [-h] [-v] [-i] [-c] [-b] [-r] [-a]"
     echo "Where:"
     echo "  -h  --help      Show this help text"
     echo "  -v  --version   Show version information"
+    echo "  -i  --init      Initialize a new project"
     echo "  -c  --clean     Clean the build directory"
     echo "  -b  --build     Build the project"
     echo "  -r  --run       Run the project"
-    echo "  -a  --All       All of the above"
+    echo "  -a  --all       Perform all steps: clean, build, and run the project"
 }
 # This script sets up the build environment for raylib boilerplate project.
 
-while getopts ":abcrhv" OPT; do
+while getopts ":abcrhvi" OPT; do
     case "$OPT" in
         c|--clean) clean ;;
         b|--build)
@@ -59,6 +84,7 @@ while getopts ":abcrhv" OPT; do
             build
             run
             ;;
+        i|--init) init ;;
         h|--help) usage ;;
         v|--version) version ;;
         \?) echo "Unknown parameter passed: $1"; usage; exit 1 ;;
